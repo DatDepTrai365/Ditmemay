@@ -839,3 +839,5 @@ end)
 hookfunction(workspace.Raycast, function() -- noclip bypass
     return
 end)
+
+autoStory()
