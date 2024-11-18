@@ -23,7 +23,7 @@ local HRP = Character.PrimaryPart
 local part
 local dontTPOnDeath = true
 
-if LocalPlayer.PlayerStats.Level.Value == 100 then while true do print("Level 100, Auto pres disabled") task.wait(9999999) end end
+if LocalPlayer.PlayerStats.Level.Value == 50 then while true do print("Level 50, Auto pres disabled") task.wait(9999999) end end
 
 if not LocalPlayer.PlayerGui:FindFirstChild("HUD") then
     print("I FOUND IT")
@@ -57,7 +57,7 @@ local File = pcall(function()
     Data = game:GetService('HttpService'):JSONDecode(readfile("AutoPres3_"..LocalPlayer.Name..".txt"))
 end)
 
-if not File and LocalPlayer.PlayerStats.Level.Value ~= 100 then
+if not File and LocalPlayer.PlayerStats.Level.Value ~= 50 then
     Data = {
         ["Time"] = tick(),
         ["Prestige"] = LocalPlayer.PlayerStats.Prestige.Value,
@@ -743,11 +743,11 @@ local function autoStory()
         else
             autoStory()
         end
-    elseif LocalPlayer.PlayerStats.Level.Value == 100 then
+    elseif LocalPlayer.PlayerStats.Level.Value == 50 then
         if Character:FindFirstChild("FocusCam") then
             Character.FocusCam:Destroy()
 			SendWebhook(
-            "**Prestige 3, Level 100 reached!**" ..
+            "**Prestige 3, Level 50 reached!**" ..
             "\nTime: `" .. (tick() - Data["Time"])/60 .. " minutes or " .. (tick() - Data["Time"])/3600 .. " hours`" ..
             "\nFrom: `Prestige: ".. Data["Prestige"]  .. ", Level " .. Data["Level"] .. "`" ..
             "\nStand: `" .. LocalPlayer.PlayerStats.Stand.Value .. "`" ..
@@ -761,7 +761,7 @@ local function autoStory()
 
 
 
-    elseif questPanel:FindFirstChild("Take down 3 vampires") and LocalPlayer.PlayerStats.Spec.Value ~= "None" and LocalPlayer.PlayerStats.Level.Value >= 25 and LocalPlayer.PlayerStats.Level.Value ~= 100 then
+    elseif questPanel:FindFirstChild("Take down 3 vampires") and LocalPlayer.PlayerStats.Spec.Value ~= "None" and LocalPlayer.PlayerStats.Level.Value >= 25 and LocalPlayer.PlayerStats.Level.Value ~= 50 then
         getgenv().HamonCharge = 10
         local function vampire()
             LocalPlayer.Character.PrimaryPart.CFrame = workspace.Living:FindFirstChild("Vampire").HumanoidRootPart.CFrame - Vector3.new(0, 15, 0)
@@ -777,11 +777,11 @@ local function autoStory()
         killNPC("Vampire", 15, false, vampire)
         autoStory()
 
-    elseif LocalPlayer.PlayerStats.Level.Value == 100 then
+    elseif LocalPlayer.PlayerStats.Level.Value == 50 then
         if Character:FindFirstChild("FocusCam") then
             Character.FocusCam:Destroy()
 			SendWebhook(
-            "**Prestige 3, Level 100 reached!**" ..
+            "**Prestige 3, Level 50 reached!**" ..
             "\nTime: `" .. (tick() - Data["Time"])/60 .. " minutes or " .. (tick() - Data["Time"])/3600 .. " hours`" ..
             "\nFrom: `Prestige: ".. Data["Prestige"]  .. ", Level " .. Data["Level"] .. "`" ..
             "\nStand: `" .. LocalPlayer.PlayerStats.Stand.Value .. "`" ..
@@ -800,7 +800,7 @@ task.spawn(function()
         if checkPrestige(LocalPlayer.PlayerStats.Level.Value, LocalPlayer.PlayerStats.Prestige.Value) then
             print("Prestiged")
             Teleport()
-        elseif LocalPlayer.PlayerStats.Level.Value 100 then
+        elseif LocalPlayer.PlayerStats.Level.Value == 50 then
 		    if not Character:FindFirstChild("FocusCam") then
                 Character.FocusCam:Destroy()
                 break
@@ -813,7 +813,7 @@ end)
 
 game.Workspace.Living.ChildAdded:Connect(function(character)
     if character.Name == LocalPlayer.Name then
-        if LocalPlayer.PlayerStats.Level.Value == 100 then
+        if LocalPlayer.PlayerStats.Level.Value == 50 then
             print("didnt reconnect")
         else
             if dontTPOnDeath then
