@@ -55,7 +55,7 @@ local File = pcall(function()
     Data = game:GetService('HttpService'):JSONDecode(readfile("AutoPres3_"..LocalPlayer.Name..".txt"))
 end)
 
-if not File and LocalPlayer.PlayerStats.Level.Value ~= 50 then
+if not File and LocalPlayer.PlayerStats.Level.Value ~= 100 then
     Data = {
         ["Time"] = tick(),
         ["Prestige"] = LocalPlayer.PlayerStats.Prestige.Value,
