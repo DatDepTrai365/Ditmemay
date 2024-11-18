@@ -741,7 +741,7 @@ local function autoStory()
         else
             autoStory()
         end
-    elseif LocalPlayer.PlayerStats.Level.Value == 50 then
+    elseif LocalPlayer.PlayerStats.Level.Value == 100 then
         if Character:FindFirstChild("FocusCam") then
             Character.FocusCam:Destroy()
 			SendWebhook(
