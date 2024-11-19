@@ -759,7 +759,7 @@ local function autoStory()
 
 
 
-    elseif questPanel:FindFirstChild("Take down 3 vampires") and LocalPlayer.PlayerStats.Spec.Value ~= "None" and LocalPlayer.PlayerStats.Level.Value >= 25 and LocalPlayer.PlayerStats.Level.Value ~= 100 then
+    elseif questPanel:FindFirstChild("Defeat "Heaven Ascension Dio"") and LocalPlayer.PlayerStats.Spec.Value ~= "None" and LocalPlayer.PlayerStats.Level.Value >= 25 and LocalPlayer.PlayerStats.Level.Value ~= 100 then
         getgenv().HamonCharge = 10
         local function vampire()
             LocalPlayer.Character.PrimaryPart.CFrame = workspace.Living:FindFirstChild("Heaven Ascension Dio").HumanoidRootPart.CFrame - Vector3.new(0, 15, 0)
@@ -772,7 +772,7 @@ local function autoStory()
             end
         end
 
-        killNPC("Vampire", 15, false, vampire)
+        killNPC("Heaven Ascension Dio", 15, false, vampire)
         autoStory()
 
     elseif LocalPlayer.PlayerStats.Level.Value == 100 then
