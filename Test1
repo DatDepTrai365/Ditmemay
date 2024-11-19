@@ -601,7 +601,7 @@ local function autoStory()
         if not questPanel:FindFirstChild("Defeat "Heaven Ascension Dio"") then
             SendWebhook("Account: `" .. LocalPlayer.Name .. "`\nTook around: `".. (tick() - lastTick).. " seconds` to complete a quest")
             lastTick = tick()
-            endDialogue("Heaven Ascension Dio Quest", "Dialogue4", "Option1")
+            endDialogue("Heaven Ascension DEO Quest", "Dialogue5", "Option1")
         end
     
         LocalPlayer.QuestsRemoteFunction:InvokeServer({[1] = "ReturnData"})
@@ -768,11 +768,11 @@ local function autoStory()
                     SendWebhook("Account: `" .. LocalPlayer.Name .. "`\nTook around: `".. (tick() - lastTick).. " seconds` to complete `Vampire Quest`")
                     lastTick = tick()
                 end
-                endDialogue("Heaven Ascension Dio Quest", "Dialogue4", "Option1")
+                endDialogue("Heaven Ascension DEO Quest", "Dialogue5", "Option1")
             end
         end
 
-        killNPC("Heaven Ascension Dio", 30, true, vampire)
+        killNPC("Heaven Ascension DEO", 30, true, vampire)
         autoStory()
 
     elseif LocalPlayer.PlayerStats.Level.Value == 100 then
