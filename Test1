@@ -1,87 +1,3 @@
---//Config\\--
-getgenv().AutoFarm = true
-getgenv().PickupDelay = 0.6
-getgenv().MaxTeleportDistance = 100
-getgenv().TeleportSpeed = 100
-
---//Script\\--
-local RunService = game:GetService("RunService")
-
-local LocalPlayer = game.Players.LocalPlayer
-local Character = LocalPlayer.Character
-local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
-
-local function TeleportToPlace(targetCFrame)
-    local startPosition = HumanoidRootPart.Position
-    local direction = (targetCFrame.Position - startPosition).unit
-    local distance = (targetCFrame.Position - startPosition).Magnitude
-
-    local GoalCFrame
-    local Loop = RunService.Heartbeat:Connect(function()
-        if not GoalCFrame then return end
-
-        for _, BasePart in pairs(Character:GetDescendants()) do
-            if BasePart:IsA("BasePart") and BasePart.CanCollide then
-                BasePart.CanCollide = false
-            end
-        end
-
-        HumanoidRootPart.CFrame = GoalCFrame
-    end)
-
-    local bodyVelocity = Instance.new("BodyVelocity")
-    bodyVelocity.Velocity = Vector3.new(0, 0, 0)
-    bodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge) -- Only counteract gravity on the Y axis
-    bodyVelocity.Parent = HumanoidRootPart
-
-    while distance > getgenv().MaxTeleportDistance do
-        startPosition = startPosition + direction * getgenv().MaxTeleportDistance
-        GoalCFrame = CFrame.new(startPosition)
-        distance = (targetCFrame.Position - startPosition).Magnitude
-        task.wait(10 / (getgenv().TeleportSpeed*10) )
-    end
-
-    GoalCFrame = targetCFrame
-    task.wait()
-
-    Loop:Disconnect()
-    bodyVelocity:Destroy()
-    task.wait()
-end
-
-local function LocateItem()
-    for _, Item in pairs(workspace.Item_Spawns.Items:GetChildren()) do
-        local ItemMeshPart = Item:FindFirstChild("MeshPart")
-        local ProximityPrompt = Item:FindFirstChild("ProximityPrompt")
-
-        if not ItemMeshPart or not ProximityPrompt then continue end
-        if ProximityPrompt.MaxActivationDistance ~= 8 then continue end 
-
-        return {
-            ["ItemName"] = ProximityPrompt.ObjectText,
-            ["ProximityPrompt"] = ProximityPrompt,
-            ["CFrame"] = ItemMeshPart.CFrame,
-            ["Instance"] = Item
-        }
-    end
-end
-
-while getgenv().AutoFarm do
-    task.wait()
-
-    local TargetItem = LocateItem()
-
-    --//Pickup Item\\--
-    TeleportToPlace(TargetItem.CFrame)
-
-    if (HumanoidRootPart.Position - TargetItem.CFrame.Position).Magnitude <= 8 then
-        task.wait(getgenv().PickupDelay)
-        fireproximityprompt(TargetItem.ProximityPrompt)
-        task.wait(getgenv().PickupDelay)
-        TargetItem.Instance:Destroy()
-    end
-end
-
 -- code written by dank
 -- bug fixes by Vezise/vez/_vez0
 -- hamon fix by DuongNoob (cuz me vez was too lazy)
@@ -99,6 +15,8 @@ end)
 
 repeat task.wait() until game:IsLoaded() and game.Players.LocalPlayer and game.Players.LocalPlayer.Character
 
+local LocalPlayer = game.Players.LocalPlayer
+local Character = LocalPlayer.Character
 repeat task.wait() until Character:FindFirstChild("RemoteEvent") and Character:FindFirstChild("RemoteFunction")
 local RemoteFunction, RemoteEvent = Character.RemoteFunction, Character.RemoteEvent
 local HRP = Character.PrimaryPart
@@ -643,7 +561,7 @@ local function autoStory()
             collectAndSell("Caesar's headband", 10)
         end
 
-        if LocalPlayer.Backpack:FindFirstChild("Zeppeli's Hat") then
+        if LocalPlayer.Backpack:FindFirstChild("Zeppelii's Hat") then
             SendWebhook("Buying `Hamon`")
              LocalPlayer.Character.Humanoid:EquipTool(LocalPlayer.Backpack:FindFirstChild("Zeppeli's Hat"))
             game.Players.LocalPlayer.Character.RemoteEvent:FireServer("PromptTriggered", game.ReplicatedStorage.NewDialogue:FindFirstChild("Lisa Lisa"))
@@ -680,10 +598,10 @@ local function autoStory()
     end
         
     while #questPanel:GetChildren() < 2 and repeatCount < 1000 do
-        if not questPanel:FindFirstChild("Take down 3 vampires") then
+        if not questPanel:FindFirstChild("Defeat "Heaven Ascension Dio"") then
             SendWebhook("Account: `" .. LocalPlayer.Name .. "`\nTook around: `".. (tick() - lastTick).. " seconds` to complete a quest")
             lastTick = tick()
-            endDialogue("William Zeppeli", "Dialogue4", "Option1")
+            endDialogue("Jotaro", "Dialogue4", "Option1")
         end
     
         LocalPlayer.QuestsRemoteFunction:InvokeServer({[1] = "ReturnData"})
@@ -841,16 +759,16 @@ local function autoStory()
 
 
 
-    elseif questPanel:FindFirstChild("Take down 3 vampires") and LocalPlayer.PlayerStats.Spec.Value ~= "None" and LocalPlayer.PlayerStats.Level.Value >= 25 and LocalPlayer.PlayerStats.Level.Value ~= 100 and not TargetItem then
+    elseif questPanel:FindFirstChild("Take down 3 vampires") and LocalPlayer.PlayerStats.Spec.Value ~= "None" and LocalPlayer.PlayerStats.Level.Value >= 25 and LocalPlayer.PlayerStats.Level.Value ~= 100 then
         getgenv().HamonCharge = 10
         local function vampire()
-            LocalPlayer.Character.PrimaryPart.CFrame = workspace.Living:FindFirstChild("Vampire").HumanoidRootPart.CFrame - Vector3.new(0, 15, 0)
-            if not questPanel:FindFirstChild("Take down 3 vampires") then
+            LocalPlayer.Character.PrimaryPart.CFrame = workspace.Living:FindFirstChild("Heaven Ascension Dio").HumanoidRootPart.CFrame - Vector3.new(0, 15, 0)
+            if not questPanel:FindFirstChild("Defeat "Heaven Ascension Dio"") then
                 if (tick() - lastTick) >= 5 then
                     SendWebhook("Account: `" .. LocalPlayer.Name .. "`\nTook around: `".. (tick() - lastTick).. " seconds` to complete `Vampire Quest`")
                     lastTick = tick()
                 end
-                endDialogue("William Zeppeli", "Dialogue4", "Option1")
+                endDialogue("Jotaro", "Dialogue4", "Option1")
             end
         end
 
