@@ -561,7 +561,7 @@ local function autoStory()
             collectAndSell("Caesar's headband", 10)
         end
 
-        if LocalPlayer.Backpack:FindFirstChild("Zeppeli's Hat") then
+        if LocalPlayer.Backpack:FindFirstChild("Zeppelii's Hat") then
             SendWebhook("Buying `Hamon`")
              LocalPlayer.Character.Humanoid:EquipTool(LocalPlayer.Backpack:FindFirstChild("Zeppeli's Hat"))
             game.Players.LocalPlayer.Character.RemoteEvent:FireServer("PromptTriggered", game.ReplicatedStorage.NewDialogue:FindFirstChild("Lisa Lisa"))
