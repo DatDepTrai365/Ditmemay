@@ -542,8 +542,8 @@ local function autoStory()
         
         if not LocalPlayer.Backpack:FindFirstChild("Zeppeli's Hat") then
             SendWebhook("Farming `Caesar's Headband` to purchase `Hamon`")
-            task.wait(60)
-            farmItem("Zeppeli's Hat", 1)
+            task.wait(80)
+            farmItem("Zeppelii's Hat", 1)
         end
 
         if LocalPlayer.PlayerStats.Money.Value <= 10000 then
